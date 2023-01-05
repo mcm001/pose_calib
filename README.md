@@ -22,12 +22,20 @@ If you use this application for scientific work, please consider citing us as
 Dependencies
 ============
 - Python: 3.x
-- OpenCV: 3.x
+- OpenCV: Before or equal to 3.4.17.*
     - including OpenCV contrib
     - compiled with Qt highui backend
 
 Usage
 =====
+
+It's strongly encouraged to create a virtual environment. Create and install requirements with the following commands:
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 Call `pose_calib.py` with a [calibration config file](data/calib_config.yml) as
 
@@ -39,7 +47,3 @@ Press `m` to toggle between normal and mirrored display. You can find the [defau
 After convergence, the resulting calibration properties will be written as `calib_<cameraId>.yml`.
 
 Camera, image resolution and charuco settings can be changed via the calibration config file.
-
-A pre-build package for Ubuntu is installable via the snapcraft store
-
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/posecalib)
