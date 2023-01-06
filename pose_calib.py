@@ -29,6 +29,7 @@ class UVCVideoCapture:
         cap = cv2.VideoCapture(cam_id)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, imsize[0])
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, imsize[1])
+        cap.set(cv2.CAP_PROP_FPS, 30)
         cap.set(cv2.CAP_PROP_GAIN, 0.0)
         cap.set(cv2.CAP_PROP_AUTOFOCUS, 0.0 if self.manual_focus else 1.0)
         cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
