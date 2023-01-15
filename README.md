@@ -1,3 +1,8 @@
+RTSP Support
+============
+
+Locally, ensure `calib_config.yml` contains `rtsp: True`, and the resolution is set properly to match what we'll set the Pi doing. Run the `pose_calib.py` file. On the Pi, ensure Photon isn't running (`sudo service photonvision stop`) and then run `libcamera-vid -t 0 --inline --width 640 --height 480 --inline -n -o udp://192.168.1.177:9001`. Video mode can be specified with `--mode width:height`. See `libcamera-vid -h` for more info. Note as is there's like a good second of latency. Calibrate as you normally would. The calibration will be spat out.
+
 Abstract
 ========
 

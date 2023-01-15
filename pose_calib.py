@@ -47,6 +47,20 @@ class UVCVideoCapture:
     def read(self):
         return self.cap.read()
 
+class RTSP_Cap:
+    def __init__(self, cfg):
+        self.manual_focus = True
+        self.manual_exposure = True
+
+        cap = cv2.VideoCapture("udp://@0.0.0.0:9001")
+        self.cap = cap
+        
+    def set(self, prop, val):
+        self.cap.set(prop, val)
+        
+    def read(self):
+        return self.cap.read()
+
 def add_camera_controls(win_name, cap):
     cv2.namedWindow(win_name, cv2.WINDOW_AUTOSIZE | cv2.WINDOW_GUI_NORMAL)
 
@@ -80,7 +94,11 @@ def main():
 
     # Video I/O
     live = cfg.getNode("images").empty()
-    if live:
+    if not (cfg.getNode("rtsp").empty()):
+        cap = RTSP_Cap(cfg)
+        add_camera_controls("PoseCalib", cap)
+        wait=1
+    elif live:
         cap = UVCVideoCapture(cfg)
         add_camera_controls("PoseCalib", cap)
         wait = 1
@@ -108,6 +126,7 @@ def main():
             img = _img
         else:
             force = False
+            continue
 
         tracker.detect(img)
 
